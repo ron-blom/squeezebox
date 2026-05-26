@@ -18,3 +18,45 @@ spec:
     requests:
       storage: "1Gi"
   storageClassName: local-path
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    helm.sh/resource-policy: "keep"
+    meta.helm.sh/release-name: "{{ $.Release.Name }}"
+    meta.helm.sh/release-namespace: "{{ $.Release.Namespace }}"
+  name: squeezebox-music
+  labels:
+    app: squeezebox-music
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "10Gi"
+  storageClassName: local-path
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  annotations:
+    helm.sh/resource-policy: "keep"
+    meta.helm.sh/release-name: "{{ $.Release.Name }}"
+    meta.helm.sh/release-namespace: "{{ $.Release.Namespace }}"
+  name: squeezebox-playlist
+  labels:
+    app: squeezebox-playlist
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: "{{ .Release.Name }}"
+    heritage: "{{ .Release.Service }}"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+  storageClassName: local-path
